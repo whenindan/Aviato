@@ -1,0 +1,200 @@
+/* ==========================================================================
+   Polish pass — cleaner buttons, calmer motion, themed form controls.
+   Loaded last: intentionally overrides index/theme/refinement where noted.
+   ========================================================================== */
+
+/* ---- 1. Arrival flash for smooth-scrolled section jumps ---------------- */
+
+.nav-arrived { animation: nav-flash .9s var(--ease-out); }
+@keyframes nav-flash {
+  0% { box-shadow: inset 0 0 0 9999px color-mix(in srgb, var(--accent) 6%, transparent); }
+  100% { box-shadow: inset 0 0 0 9999px transparent; }
+}
+
+/* ---- 2. Unified "action" button system ---------------------------------
+   Everything that reads as a call-to-action — the briefing preview, the
+   save/generate/add links inside product mocks, the checklist reset —
+   shares one restrained, squared-off shape. Hover is a flat highlight only:
+   no lift, no drift, no shine sweep. */
+
+.briefing-button,
+.demo-link,
+.checklist-footer button.checklist-reset,
+.save-airport {
+  border-radius: 3px;
+}
+
+.briefing-button,
+.demo-link {
+  font-weight: 500;
+  letter-spacing: .01em;
+  transition: background-color .2s ease, color .2s ease;
+}
+.briefing-button:hover:not(:disabled),
+.demo-link:hover {
+  box-shadow: none;
+}
+.briefing-button::after { content: none; }
+
+.briefing-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 13px;
+  padding: 14px 18px;
+  border: none;
+}
+.briefing-button:hover:not(:disabled) { filter: brightness(1.08); }
+.briefing-button__label { display: inline-flex; align-items: center; gap: 9px; }
+.briefing-button__icon,
+.demo-link > span { transition: none; }
+.briefing-button:hover:not(:disabled) .briefing-button__icon,
+.demo-link:hover > span { transform: none; }
+.briefing-spinner {
+  width: 13px; height: 13px; border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--on-accent) 35%, transparent);
+  border-top-color: var(--on-accent);
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.demo-link {
+  padding: 15px 18px;
+  min-height: 48px;
+  border: none;
+}
+.demo-link:hover { filter: brightness(1.06); }
+.demo-link[aria-pressed="true"]:hover { background: var(--line); filter: none; }
+
+.checklist-footer button.checklist-reset {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 13px; border: 1px solid var(--line);
+  background: transparent; color: var(--muted);
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.checklist-footer button.checklist-reset:hover:not(:disabled) { background: var(--raised); color: var(--text); border-color: var(--muted); }
+.checklist-footer button.checklist-reset svg { transition: none; }
+.checklist-footer button.checklist-reset:disabled { opacity: .4; }
+
+.save-airport { transition: background-color .2s ease, border-color .2s ease; }
+.save-airport:hover { transform: none; background: var(--raised); }
+.source-link { transition: color .2s ease; }
+.source-link:hover { color: var(--muted); }
+
+/* ---- 3. Checklist — a flat, minimal list; motion is transitions only,
+   never a pop/rotate keyframe, so checking AND unchecking read the same. --- */
+
+.interactive-checks { gap: 0; }
+.interactive-checks button {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  padding: 15px 2px;
+  background: transparent;
+  transition: background-color .2s ease;
+}
+.interactive-checks button:last-child { border-bottom: 0; }
+.interactive-checks button:hover,
+.interactive-checks button[aria-checked="true"] { padding-left: 2px; background: transparent; }
+.interactive-checks button:hover .check-text { color: var(--text); }
+.check-box {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: transparent;
+  transition: border-color .25s ease;
+}
+.interactive-checks button[aria-checked="true"] .check-box { border-color: var(--accent); }
+.check-box .check-mark {
+  animation: none; /* overrides the legacy check-in keyframe on .check-box svg */
+  color: var(--accent);
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity .25s var(--ease-out), transform .25s var(--ease-out);
+}
+.interactive-checks button[aria-checked="true"] .check-mark { opacity: 1; transform: translateY(0); }
+
+.check-text { transition: color .25s ease; }
+.interactive-checks button[aria-checked="true"] .check-text {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--line);
+  text-decoration-thickness: 1px;
+}
+
+.check-progress { border-radius: 2px; overflow: hidden; }
+.check-progress i { transition: none; } /* width is driven frame-by-frame by useAnimatedNumber */
+
+/* ---- 4. Airport picker — calmer popover, no bold in results ------------ */
+
+.airport-popover {
+  transform-origin: top;
+  animation: none;
+  opacity: 0;
+  transform: translateY(-6px) scale(.98);
+  transition: opacity .2s var(--ease-out), transform .22s var(--ease-out);
+  pointer-events: none;
+}
+.airport-popover.is-open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+.picker-code-chip {
+  font-size: 12px; font-weight: 500; letter-spacing: .01em;
+  color: var(--text); flex: none;
+}
+
+/* ---- 5. US map — restore the transitions lost in the geo- rename ------- */
+
+.geo-point { transition: fill .25s ease, r .3s var(--ease-out); }
+.geo-airport text { transition: opacity .3s var(--ease-out), fill .25s ease; }
+.geo-airport text.is-hidden { opacity: 0; }
+.map-geography { transition: transform .5s var(--ease-out); }
+.geo-airport { transition: transform .05s; }
+.geo-controls button { transition: background .2s; }
+
+/* ---- 6. Aircraft select — themed, not a bare native control ------------ */
+
+.craft-select { position: relative; display: block; margin-bottom: 14px; }
+.craft-select__label {
+  display: block; margin-bottom: 8px; color: var(--muted);
+  font-size: 11px; letter-spacing: .02em;
+}
+.craft-select__trigger {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; padding: 12px 14px; font-size: 13px; font-weight: 500;
+  color: var(--text); background: var(--raised); border: 1px solid var(--line);
+  border-radius: 10px; text-align: left;
+  transition: border-color .2s, background .2s;
+}
+.craft-select__trigger:hover { border-color: var(--muted); }
+.craft-select__trigger[aria-expanded="true"] { border-color: var(--muted); background: var(--panel); }
+.craft-select__chevron { color: var(--muted); transition: transform .25s var(--ease-out); flex: none; }
+.craft-select__trigger[aria-expanded="true"] .craft-select__chevron { transform: rotate(180deg); }
+.craft-select__menu {
+  position: absolute; z-index: 30; top: calc(100% + 6px); left: 0; right: 0;
+  padding: 5px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 10px; box-shadow: 0 16px 40px var(--shadow);
+  transform-origin: top; animation: select-menu-in .18s var(--ease-out) both;
+}
+@keyframes select-menu-in { from { opacity: 0; transform: translateY(-4px) scale(.98); } to { opacity: 1; transform: none; } }
+.craft-select__menu button {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; padding: 10px 11px; border: 0; border-radius: 7px;
+  background: transparent; color: var(--text); font-size: 12px; text-align: left;
+  transition: background .18s;
+}
+.craft-select__menu button:hover { background: var(--raised); }
+.craft-select__menu button.is-selected { color: var(--accent); }
+
+/* ---- 7. No click jiggle, anywhere -------------------------------------
+   refinement.css presses every button down .97/.98/.985 scale on :active
+   (some of that via `button:active:not(:disabled)`, whose extra :not()
+   pseudo out-specifies a plain single-class override). One deliberate
+   !important reset beats all of it in one place instead of chasing each
+   selector's specificity individually. */
+button:active, .btn:active, a:active { transform: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-arrived, .check-box svg, .craft-select__menu, .airport-popover { animation: none !important; }
+  .airport-popover { transition: none; opacity: 1; transform: none; }
+}

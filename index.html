@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VYSION · Fly prepared</title>
+    <script>
+      (() => {
+        let theme = 'dark';
+        try { const saved = localStorage.getItem('vysion-theme'); if (saved === 'light' || saved === 'dark') theme = saved; } catch {}
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
+    <meta
+      name="description"
+      content="VYSION is the all-in-one companion for general aviation pilots · airport data, aircraft profiles, FAR/AIM reference, nav log calculation, preflight checklists, and AI-generated flight debriefs."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,322 @@
+/* ==========================================================================
+   Institutional Minimal — design tokens
+   Companion to DESIGN_GUIDELINES.md
+   Swap the font stack for your licensed family before production.
+   ========================================================================== */
+
+:root {
+  /* ---- Color ---- */
+  --ink-deep: #0D0E10;
+  --ink: #1E1F2B;
+  --ink-muted: #1E2124;
+  --canvas: #FFFFFF;
+  --surface: #EFEFEF;
+  --surface-cool: #ABABAB;
+  --surface-warm: #AAAAAA;
+  --border: #636363;
+  --border-light: #767676;
+  --text-primary: #1E1F2B;
+  --text-inverse: #EFEFEF;
+  --text-muted: #767676;
+
+  /* Contextual aliases — flipped by .surface-dark / .surface-light */
+  --bg: var(--canvas);
+  --fg: var(--text-primary);
+  --rule: var(--border-light);
+
+  /* ---- Type ---- */
+  --font-display: "Alliance No 2", "Inter Display", "Suisse Int'l", Helvetica, Arial, sans-serif;
+  --font-body: "Alliance No 1", "Inter", "Suisse Int'l", Helvetica, Arial, sans-serif;
+
+  --size-display-xl: clamp(2.5rem, 8vw, 6.25rem);
+  --size-display-lg: clamp(2.5rem, 6.5vw, 5rem);
+  --size-display-md: clamp(2rem, 5.5vw, 4.5rem);
+  --size-heading: clamp(1.5rem, 3vw, 2rem);
+  --size-body-lg: 1.125rem;
+  --size-body: 1rem;
+  --size-label: 0.625rem;
+
+  --lh-display-xl: 1.15;
+  --lh-display-lg: 0.975;
+  --lh-display-md: 0.972;
+  --lh-heading: 1.2;
+  --lh-body-lg: 1.389;
+  --lh-body: 1.429;
+  --lh-label: 1.6;
+
+  --track-display-xl: -0.02em;
+  --track-display-lg: -0.0425em;
+  --track-display-md: -0.02em;
+  --track-heading: -0.01em;
+  --track-label: 0.05em;
+
+  /* ---- Space ---- */
+  --space-1: 10px;
+  --space-2: 20px;
+  --space-3: 30px;   /* default gap everywhere */
+  --space-4: 40px;
+  --space-5: 50px;
+  --space-6: 80px;
+  --space-7: 100px;
+  --space-8: 150px;
+
+  /* ---- Structure ---- */
+  --container: 1280px;
+  --gutter: var(--space-3);
+  --radius: 0px;
+  --radius-panel: 10px;
+  --radius-pill: 60px;
+  --hairline: 1px;
+  --shadow-panel: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --dur: 240ms;
+}
+
+@media (max-width: 767px) {
+  :root { --gutter: var(--space-2); }
+}
+
+/* ---- Surface inversion ------------------------------------------------- */
+
+.surface-dark {
+  --bg: var(--ink-deep);
+  --fg: var(--text-inverse);
+  --rule: var(--border);
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.surface-light {
+  --bg: var(--canvas);
+  --fg: var(--text-primary);
+  --rule: var(--border-light);
+  background: var(--bg);
+  color: var(--fg);
+}
+
+/* ---- Base -------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  line-height: var(--lh-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section { padding-block: var(--space-7); }
+@media (max-width: 1199px) { .section { padding-block: var(--space-6); } }
+@media (max-width: 767px)  { .section { padding-block: var(--space-5); } }
+
+/* ---- Type ------------------------------------------------------------- */
+
+.display-xl, .display-lg, .display-md, .heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.display-xl { font-size: var(--size-display-xl); line-height: var(--lh-display-xl); letter-spacing: var(--track-display-xl); }
+.display-lg { font-size: var(--size-display-lg); line-height: var(--lh-display-lg); letter-spacing: var(--track-display-lg); }
+.display-md { font-size: var(--size-display-md); line-height: var(--lh-display-md); letter-spacing: var(--track-display-md); }
+.heading    { font-size: var(--size-heading);    line-height: var(--lh-heading);    letter-spacing: var(--track-heading); }
+
+.body-lg { font-size: var(--size-body-lg); line-height: var(--lh-body-lg); max-width: 62ch; }
+.body    { font-size: var(--size-body);    line-height: var(--lh-body);    max-width: 70ch; }
+
+/* The system's only uppercase style. Keep the DOM text sentence case. */
+.label {
+  font-family: var(--font-display);
+  font-size: var(--size-label);
+  line-height: var(--lh-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.surface-dark .label { color: var(--surface-warm); }
+
+/* ---- Rules ------------------------------------------------------------- */
+
+.rule { border: 0; border-top: var(--hairline) solid var(--rule); margin: 0; }
+
+/* ---- Buttons ----------------------------------------------------------- */
+
+.btn {
+  display: inline-block;
+  font: inherit;
+  padding: 14px 19px;
+  border-radius: var(--radius);
+  border: var(--hairline) solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+
+.btn--primary {
+  background: var(--ink);
+  color: var(--surface);
+}
+.surface-dark .btn--primary {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.btn--outlined {
+  background: transparent;
+  color: var(--fg);
+  border-color: var(--rule);
+}
+.btn--outlined:hover { border-color: var(--fg); }
+
+.btn--text {
+  padding-inline: 0;
+  background: none;
+  color: var(--fg);
+  text-decoration: none;
+}
+.btn--text:hover { text-decoration: underline; }
+
+.btn--pill {
+  border-radius: var(--radius-pill);
+  border-color: var(--rule);
+  padding: 13px;
+  background: transparent;
+  color: var(--fg);
+}
+
+/* ---- Form fields (underline only) -------------------------------------- */
+
+.field { display: flex; flex-direction: column; gap: var(--space-1); margin-bottom: var(--space-3); }
+
+.field input,
+.field textarea,
+.field select {
+  font: inherit;
+  color: var(--fg);
+  background: transparent;
+  border: 0;
+  border-bottom: var(--hairline) solid var(--fg);
+  border-radius: var(--radius);
+  padding: 2px 2px 8px;
+  transition: border-color var(--dur) var(--ease);
+}
+
+.field input:hover,
+.field textarea:hover { border-bottom-color: var(--border); }
+
+/* Focus must be more than the resting hairline. */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 3px;
+}
+
+/* ---- Grid -------------------------------------------------------------- */
+
+.grid {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(12, 1fr);
+}
+@media (max-width: 1199px) { .grid { grid-template-columns: repeat(6, 1fr); } }
+@media (max-width: 767px)  { .grid { grid-template-columns: 1fr; } }
+
+/* ---- Header ------------------------------------------------------------ */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4);
+  background: transparent;
+  transition: background-color var(--dur) var(--ease);
+}
+.header.is-scrolled { background: var(--bg); }
+.header a { font-size: var(--size-body-lg); color: inherit; text-decoration: none; }
+
+/* ---- Hero -------------------------------------------------------------- */
+
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 40vh 30vh;
+}
+
+/* ---- Footer ------------------------------------------------------------ */
+
+.footer {
+  padding-block: 90px var(--space-7);
+  border-top: var(--hairline) solid var(--rule);
+}
+.footer__grid { display: grid; gap: var(--space-7) var(--space-3); }
+.footer__links { display: grid; gap: var(--space-5) var(--space-3); }
+
+/* ---- Panels ------------------------------------------------------------ */
+
+.panel {
+  background: var(--canvas);
+  color: var(--text-primary);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-panel);
+}
+
+.scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 14, 16, 0.9);
+}
+
+.modal {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(560px, 100%);
+  background: var(--canvas);
+  color: var(--text-primary);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  overflow-y: auto;
+  animation: slide-in var(--dur) var(--ease);
+}
+
+@keyframes slide-in {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+/* ---- Media ------------------------------------------------------------- */
+
+img, video {
+  display: block;
+  max-width: 100%;
+  border-radius: var(--radius);
+  filter: grayscale(1);
+}
+
+/* ---- Motion ------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
