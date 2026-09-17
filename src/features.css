@@ -1,0 +1,136 @@
+/* New CSS for the reworked feature set: sectional map, ETD/aircraft inputs,
+   briefing panel, and the ADS-B logbook mock. Uses existing tokens/building
+   blocks; nothing here overrides refinement.css or polish.css. */
+
+/* ---- Sectional map (Leaflet) ------------------------------------------- */
+.sectional-map { position: relative; flex: 1; min-height: 250px; display: flex; }
+.sectional-map__canvas { flex: 1; min-height: 250px; background: var(--page); }
+.sectional-map__fallback { position: absolute; inset: 0; display: grid; place-items: center; background: repeating-linear-gradient(45deg, var(--raised), var(--raised) 10px, var(--page) 10px, var(--page) 20px); color: var(--muted); font-size: 11px; z-index: 5; }
+.sectional-map__controls { right: 18px; bottom: 25px; z-index: 500; }
+.leaflet-container { background: var(--page); font-family: inherit; }
+.leaflet-control-attribution { font-size: 9px !important; background: color-mix(in srgb, var(--panel) 85%, transparent) !important; color: var(--muted) !important; }
+.sectional-tip { background: var(--panel) !important; border: 1px solid var(--line) !important; color: var(--text) !important; font-size: 10px !important; padding: 2px 6px !important; box-shadow: none !important; }
+.sectional-tip::before { display: none !important; }
+
+/* ---- Locked route display: departure / arrival (equal), ETD below ------ */
+.route-locked { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0 8px; }
+.route-locked__item { border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; background: var(--panel); display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.route-locked__item .picker-label { margin: 0; }
+.route-locked__item .picker-code { font-size: 24px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.route-locked__item .picker-city { margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.route-locked__etd { flex-direction: row; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.route-locked__etd-value { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.route-locked__time { color: var(--text); font-size: 22px; font-variant-numeric: tabular-nums; }
+.route-craft { font-size: 12px; color: var(--muted); margin: 0 0 14px; }
+.route-craft strong { color: var(--text); font-weight: 400; }
+
+/* ---- VFR cruising altitude callout -------------------------------------- */
+.briefing-altitude p { font-size: 12px; margin: 0 0 6px; }
+.briefing-altitude p:last-child { margin-bottom: 0; }
+.briefing-altitude strong { color: var(--accent); font-weight: 400; }
+
+/* ---- Passengers & weight and balance ------------------------------------ */
+.wb__seats { margin-bottom: 12px; }
+.wb__note { font-size: 11px; color: var(--muted); margin: 0 0 14px; }
+.wb__total td { border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.wb-cg { width: 100%; height: 44px; display: block; margin: 16px 0 10px; }
+.wb-cg__axis { stroke: var(--line); stroke-width: 1; }
+.wb-cg__band { fill: color-mix(in srgb, var(--accent) 18%, transparent); stroke: none; }
+.wb-cg__marker { fill: var(--accent); }
+.wb-cg__marker.is-out { fill: #d6603f; }
+.wb-cg text { fill: var(--muted); font-size: 8px; }
+.wb__status { font-size: 12px; color: var(--muted); margin: 0; }
+
+/* ---- Briefing panel: full-width drawer under the console content ------- */
+.briefing-panel { border-top: 1px solid var(--line); background: var(--panel); padding: 26px 28px 30px; animation: content-enter .4s var(--ease-out) both; }
+.briefing-panel__header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.briefing-panel__header h3 { font-size: 24px; font-weight: 400; letter-spacing: -.03em; margin: 6px 0; }
+.briefing-panel__header h3 span { color: var(--muted); margin: 0 6px; }
+.briefing-panel__header p { font-size: 11px; color: var(--muted); }
+.briefing-panel__header > button { border: 1px solid var(--line); background: transparent; color: var(--text); width: 30px; height: 30px; border-radius: 50%; font-size: 18px; flex: none; }
+.briefing-panel__header > button:hover { background: var(--raised); }
+.briefing-panel__section { padding: 20px 0; border-bottom: 1px solid var(--line); }
+.briefing-panel__section:last-of-type { border-bottom: 0; }
+.briefing-panel__section > .label { display: block; margin-bottom: 12px; }
+
+.briefing-profile__meta { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--muted); }
+.briefing-profile__meta strong { color: var(--text); font-weight: 400; }
+
+/* ---- Collapsed "full briefing" detail, opened on demand ----------------- */
+.briefing-more { padding: 0; border-bottom: 0; }
+.briefing-more > summary { list-style: none; cursor: pointer; padding: 20px 0; border-bottom: 1px solid var(--line); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; justify-content: space-between; }
+.briefing-more > summary::-webkit-details-marker { display: none; }
+.briefing-more > summary::after { content: '+'; font-size: 15px; }
+.briefing-more[open] > summary::after { content: '\2212'; }
+.briefing-more[open] > summary { border-bottom-color: transparent; }
+.briefing-more > summary:hover { color: var(--text); }
+
+.briefing-panel__airports { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.briefing-airport .label { display: block; margin-bottom: 8px; }
+.briefing-airport .sectional-map { height: 140px; min-height: 140px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.briefing-airport .sectional-map__canvas { min-height: 140px; }
+
+.briefing-panel__freqs { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px; }
+.briefing-panel__freqs .label { display: block; margin-bottom: 10px; }
+
+.briefing-fuel-bar { height: 4px; background: var(--raised); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+.briefing-fuel-bar i { display: block; height: 100%; background: var(--accent); }
+.briefing-fuel-bar i.is-over { background: #d6603f; }
+
+.briefing-notams { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.briefing-notams li { display: flex; align-items: flex-start; gap: 8px; font-size: 11px; line-height: 1.6; color: var(--muted); }
+.briefing-notams small { display: block; color: var(--muted); opacity: .8; }
+.briefing-sev { flex: none; width: 6px; height: 6px; border-radius: 50%; margin-top: 5px; }
+.briefing-sev--red { background: #d6603f; }
+.briefing-sev--amber { background: #d6a53f; }
+.briefing-sev--green { background: var(--accent); }
+
+.mock-table-wrap { overflow-x: auto; }
+.briefing-warnings p { font-size: 11px; color: #d6a53f; margin: 4px 0; }
+
+/* ---- Logbook mock -------------------------------------------------- */
+.logbook-stats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; padding-bottom: 18px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+.logbook-stats span { display: block; font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+.logbook-stats strong { font-size: 20px; font-weight: 400; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+
+.logbook-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.logbook-toggle { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--muted); }
+.logbook-toggle button { width: 30px; height: 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--raised); position: relative; padding: 0; }
+.logbook-toggle button[aria-checked="true"] { background: var(--accent); border-color: var(--accent); }
+.logbook-toggle button i { position: absolute; top: 1px; left: 1px; width: 14px; height: 14px; border-radius: 50%; background: var(--panel); transition: transform .2s var(--ease-out); }
+.logbook-toggle button[aria-checked="true"] i { transform: translateX(12px); background: var(--on-accent); }
+.logbook-sync { width: auto; margin: 0; padding: 9px 14px; min-height: 0; }
+
+.logbook-sync-timeline { list-style: none; margin: 0 0 16px; padding: 12px 14px; display: grid; gap: 8px; background: var(--raised); border-radius: 8px; }
+.logbook-sync-timeline li { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--muted); }
+.logbook-sync-timeline li.is-active { color: var(--text); }
+.logbook-sync-dot { width: 6px; height: 6px; border-radius: 50%; border: 1px solid var(--muted); flex: none; }
+.logbook-sync-timeline li.is-active .logbook-sync-dot { background: var(--accent); border-color: var(--accent); }
+
+.logbook-track { margin-bottom: 16px; }
+.logbook-track__svg { width: 100%; height: 46px; display: block; }
+.logbook-track__alt { fill: none; stroke: var(--accent); stroke-width: 1.4; }
+.logbook-track__gs { fill: none; stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 2 3; }
+.logbook-track__legend { display: flex; gap: 16px; margin-top: 6px; font-size: 9px; color: var(--muted); }
+.logbook-track__legend i { display: inline-block; width: 10px; height: 2px; margin-right: 5px; vertical-align: middle; }
+.logbook-track__legend i.is-alt { background: var(--accent); }
+.logbook-track__legend i.is-gs { background: var(--muted); }
+
+.logbook-table-wrap { overflow-x: auto; }
+.logbook-chip { display: inline-flex; align-items: center; gap: 4px; font-size: 9px; padding: 3px 7px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.logbook-chip--adsb { color: var(--accent); border-color: var(--accent); }
+.logbook-edit { border: 0; background: transparent; color: var(--muted); font-size: 12px; }
+.logbook-edit:hover { color: var(--text); }
+.mock-table tr.is-new { animation: content-enter .5s var(--ease-out) both; }
+.mock-table tr.is-editing input { width: 60px; background: var(--raised); border: 1px solid var(--line); border-radius: 4px; color: var(--text); padding: 3px 6px; font-size: 11px; }
+
+@media (max-width: 1199px) {
+  .briefing-panel__airports { grid-template-columns: 1fr; }
+  .briefing-panel__freqs { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 767px) {
+  .briefing-panel { padding: 20px 16px 24px; }
+  .briefing-panel__freqs { grid-template-columns: 1fr; }
+  .logbook-stats { grid-template-columns: 1fr 1fr; }
+  .logbook-toolbar { flex-direction: column; align-items: flex-start; gap: 10px; }
+}

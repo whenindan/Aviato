@@ -1,8 +1,8 @@
 const productLinks = [
-  { label: "Airport map", href: "#map" },
+  { label: "FAR/AIM chat", href: "#far-aim" },
   { label: "Aircraft profiles", href: "#aircraft" },
-  { label: "FAR/AIM reference", href: "#far-aim" },
-  { label: "Nav log", href: "#nav-log" },
+  { label: "Preflight checklist", href: "#preflight" },
+  { label: "Flight logging", href: "#logbook" },
 ];
 
 const companyLinks = [

@@ -27,7 +27,7 @@ export default function FeatureSection({
       id={id}
       className={`section feature ${dark ? "surface-dark" : "surface-light"}${
         reverse ? " feature--reverse" : ""
-      }${visible ? "" : " is-pending"}${id === "map" ? " feature--explorer" : ""}`}
+      }${visible ? "" : " is-pending"}`}
     >
       <div className="container feature__grid">
         <div className="feature__copy">

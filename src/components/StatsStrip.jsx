@@ -1,6 +1,4 @@
 const stats = [
-  { value: "5,000+", label: "US airports mapped" },
-  { value: "12", label: "Aircraft profiles" },
   { value: "14 CFR", label: "Parts 61 · 91 · 71 covered" },
   { value: "1", label: "Debrief after every flight" },
 ];

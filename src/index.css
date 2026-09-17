@@ -267,13 +267,7 @@ a {
 
 .stats__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-@media (max-width: 767px) {
-  .stats__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .stats__item {
@@ -863,7 +857,7 @@ section, #explore { scroll-margin-top: 94px; }
   .hero__top { padding-top: 48px; padding-bottom: 35px; }.hero__eyebrow { font-size: 8px; gap: 8px; }.hero__lead { font-size: 14px; }.hero__actions { gap: 16px; }.hero__actions .btn { font-size: 12px; }
   .console-content { grid-template-columns: 1fr; }.route-panel { border-right: 0; border-bottom: 1px solid #334038; padding: 22px; }.console-toolbar { padding: 14px; }.console-status { display: none; }.preview-badge { font-size: 8px; margin-left: 0; }
   .us-map { min-height: 300px; }.map-toolbar { padding: 15px 12px 0; }.map-country { font-size: 8px; }.map-bottom { padding-inline: 12px; }.map-bottom > span:last-child { display: none; }
-  .stats__item, .stats__item:first-child { padding: 25px 15px; }.stats__item:nth-child(3) { border-left: 0; }.stats__value { font-size: 30px; }.stats__label { font-size: 8px; }
+  .stats__item, .stats__item:first-child { padding: 25px 15px; }.stats__value { font-size: 30px; }.stats__label { font-size: 8px; }
   .feature__grid, .feature--reverse .feature__grid { gap: 30px; }.feature__tags { margin-top: 18px; }.feature__description { margin-top: 20px; }
 }
 @media (prefers-reduced-motion: reduce) { .feature.is-pending .feature__copy, .feature.is-pending .feature__mock { opacity: 1; transform: none; } }

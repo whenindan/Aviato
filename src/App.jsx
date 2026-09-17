@@ -1,31 +1,19 @@
 import SmoothNavigation from "./components/SmoothNavigation.jsx";
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
+import RegChatSection from "./components/RegChatSection.jsx";
 import StatsStrip from "./components/StatsStrip.jsx";
 import FeatureSection from "./components/FeatureSection.jsx";
 import WaitlistSection from "./components/WaitlistSection.jsx";
 import Footer from "./components/Footer.jsx";
+import RegChatModal from "./components/RegChatModal.jsx";
 import { features } from "./data/features.js";
-import {
-  MapMock,
-  AircraftMock,
-  RegMock,
-  AirspaceMock,
-  LibraryMock,
-  NavLogMock,
-  ChecklistMock,
-  DebriefMock,
-} from "./components/graphics/FeatureMocks.jsx";
+import { AircraftMock } from "./components/graphics/FeatureMocks.jsx";
+import LogbookMock from "./components/graphics/LogbookMock.jsx";
 
 const graphics = {
-  map: MapMock,
   aircraft: AircraftMock,
-  "far-aim": RegMock,
-  "ifr-commercial": AirspaceMock,
-  "ga-library": LibraryMock,
-  "nav-log": NavLogMock,
-  preflight: ChecklistMock,
-  debrief: DebriefMock,
+  logbook: LogbookMock,
 };
 
 export default function App() {
@@ -35,6 +23,7 @@ export default function App() {
       <Header />
       <main>
         <Hero />
+        <RegChatSection />
         <StatsStrip />
         {features.map((feature, index) => (
           <FeatureSection
@@ -51,6 +40,7 @@ export default function App() {
         <WaitlistSection />
       </main>
       <Footer />
+      <RegChatModal />
     </>
   );
 }

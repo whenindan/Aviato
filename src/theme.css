@@ -1,5 +1,6 @@
 /* A single theme governs every surface, including product previews. */
 :root {
+  color-scheme: dark;
   --page: #111512;
   --panel: #191f1b;
   --raised: #222b25;
@@ -28,6 +29,7 @@
   --rule: var(--line);
 }
 :root[data-theme="light"] {
+  color-scheme: light;
   --page: #f8faf6;
   --panel: #ffffff;
   --raised: #edf2e9;
