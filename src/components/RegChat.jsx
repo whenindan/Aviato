@@ -50,7 +50,6 @@ export default function RegChat({ compact = false, onSubmitFocus }) {
     <div className="reg-chat__header">
       <span className="reg-chat__dots" aria-hidden="true"><i /><i /><i /></span>
       <span className="reg-chat__title">vysion · far/aim</span>
-      <kbd className="reg-chat__kbd">⌘K</kbd>
     </div>
     <div className="reg-chat__log" ref={logRef} aria-live="polite">
       {!messages.length && <div className="reg-chat__empty">

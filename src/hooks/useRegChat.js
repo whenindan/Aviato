@@ -1,8 +1,8 @@
 import { useSyncExternalStore } from 'react';
 import { answer, faq } from '../data/faq.js';
 
-// Module-level store so the inline chat panel and the ⌘K modal always show
-// the same transcript, without lifting state up through App.jsx.
+// Module-level store so chat consumers share the same transcript
+// without lifting state up through App.jsx.
 let state = { messages: [], saved: [], pending: false };
 const listeners = new Set();
 function emit() { listeners.forEach(l => l()); }

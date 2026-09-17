@@ -59,8 +59,8 @@ body, .header, section, .footer, .mock, .flight-console, .console-toolbar,
 .hero__title span { color: inherit; }
 .hero__title .hero__accent { color: var(--accent); }
 .hero__eyebrow::before { box-shadow: none; }
-.stats, .feature:nth-of-type(even) { background: var(--page); }
-.stats, .feature, #waitlist { border-top: 1px solid var(--line); }
+.feature:nth-of-type(even) { background: var(--page); }
+.feature, #waitlist { border-top: 1px solid var(--line); }
 .feature__grid { position: relative; }
 .feature__copy, .feature__mock { min-width: 0; }
 .feature__index { display: flex; align-items: center; gap: 12px; }
